@@ -1,4 +1,4 @@
-from conftest import DOMAIN, ENDPOINT_LOGIN, EMAIL, PASSWORD
+from config import DOMAIN, ENDPOINT_LOGIN, EMAIL, PASSWORD
 from selene import browser
 from time import sleep
 
