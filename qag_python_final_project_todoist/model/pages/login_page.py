@@ -14,10 +14,3 @@ class LoginPage():
         browser.element('[type="password"]').type(password)
         browser.element('[type="submit"]').click()
         sleep(5)
-
-
-
-login_page = LoginPage()
-def test_test():
-    login_page.open()
-    login_page.login_email(EMAIL, PASSWORD)
