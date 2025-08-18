@@ -1,7 +1,6 @@
 from config import API_KEY
 from itertools import chain
 from todoist_api_python.api import TodoistAPI
-import iso8601
 
 def delete_all_tasks():
     api = TodoistAPI(API_KEY)
