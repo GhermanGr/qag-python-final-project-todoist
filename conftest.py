@@ -1,7 +1,7 @@
 import pytest
 from selene import browser, have
 from time import sleep
-from qag_python_final_project_todoist.model.pages.application import app
+from qag_python_final_project_todoist.web_model.pages.application import app
 from config import BASE_URL, ENDPOINT_LOGIN, EMAIL, PASSWORD, API_KEY
 from doist_api_methods import delete_all_tasks
 

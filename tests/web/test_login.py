@@ -1,4 +1,4 @@
-from qag_python_final_project_todoist.model.pages.application import app
+from qag_python_final_project_todoist.web_model.pages.application import app
 
 from config import EMAIL, PASSWORD
 from conftest import setup_landing_page
