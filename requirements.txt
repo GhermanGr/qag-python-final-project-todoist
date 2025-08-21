@@ -3,4 +3,4 @@ pytest
 allure-pytest==2.13.2
 todoist-api-python>=3.1.0,<4
 jsonschema
-Appium-Python-Client
+Appium-Python-Client==4.0.0
