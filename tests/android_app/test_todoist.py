@@ -1,15 +1,17 @@
 from allure_commons._allure import step
 from appium.webdriver.common.appiumby import AppiumBy
-from selene import browser, have
+from selene import browser, have, be
 
+def test_search(mobile_management2):
 
-def test_search():
-
-    with step('Type search'):
-        browser.element((AppiumBy.ACCESSIBILITY_ID, "Search Wikipedia")).click()
-        browser.element((AppiumBy.ID, "org.wikipedia.alpha:id/search_src_text")).type('Appium')
+    with (step('Type search')):
+        browser.element((AppiumBy.ID, 'com.todoist:id/btn_email')).click()
+        browser.element((AppiumBy.ID, 'com.todoist:id/email_login')).click()
+        browser.element((AppiumBy.XPATH, '//android.widget.EditText[@resource-id="email"]')).click()
+        browser.element((AppiumBy.XPATH, '//android.widget.EditText[@resource-id="email"]')).type('german.grebeniuk.ed@gmail.com')
+        browser.element((AppiumBy.XPATH, '//android.widget.EditText[@resource-id="password"]')).type('test1234')
+        browser.element((AppiumBy.XPATH, '//android.widget.TextView[@text="Log in"]')).click()
 
     with step('Verify content found'):
-        results = browser.all((AppiumBy.ID, 'org.wikipedia.alpha:id/page_list_item_title'))
-        results.should(have.size_greater_than(0))
-        results.first.should(have.text('Appium'))
+        browser.element((AppiumBy.ID, 'android:id/button3')).click()
+        browser.element((AppiumBy.ID, 'com.todoist:id/fab')).should(be.visible)

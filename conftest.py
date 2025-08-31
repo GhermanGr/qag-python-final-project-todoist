@@ -6,11 +6,6 @@ from config import BASE_URL, ENDPOINT_LOGIN, EMAIL, PASSWORD, API_KEY
 from doist_api_methods import delete_all_tasks
 
 
-
-'''
-FIXTURES
-'''
-
 @pytest.fixture
 def setup_landing_page():
     browser.config.browser_name = 'chrome'
