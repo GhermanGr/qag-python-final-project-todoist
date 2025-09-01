@@ -1,5 +1,4 @@
-import requests
-from selene import browser
+
 from config import API_KEY
 
 headers = {"Authorization": f"Bearer {API_KEY}"}
