@@ -1,8 +1,7 @@
-
 from selene import browser
-from time import sleep
 
-class LandingPage():
+
+class LandingPage:
     def __init__(self):
         pass
 

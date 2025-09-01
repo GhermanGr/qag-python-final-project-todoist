@@ -1,8 +1,9 @@
-from config import BASE_URL, ENDPOINT_LOGIN, EMAIL, PASSWORD
+from config import BASE_URL, ENDPOINT_LOGIN
 from selene import browser
 from time import sleep
 
-class LoginPage():
+
+class LoginPage:
     def __init__(self):
         pass
 

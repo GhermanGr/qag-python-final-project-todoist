@@ -9,14 +9,14 @@ GET_TASKS_SCHEMA = {
                     "id": {"type": "string"},
                     "content": {"type": "string"},
                     "due_string": {"type": ["string", "null"]},
-                    "priority": {"type": "integer"}
+                    "priority": {"type": "integer"},
                 },
                 "required": ["id", "content"],
-                "additionalProperties": True
-            }
+                "additionalProperties": True,
+            },
         },
-        "next_cursor": {"type": ["string", "null"]}
+        "next_cursor": {"type": ["string", "null"]},
     },
     "required": ["results", "next_cursor"],
-    "additionalProperties": False
+    "additionalProperties": False,
 }

@@ -1,6 +1,7 @@
 from config import API_KEY
 from todoist_api_python.api import TodoistAPI
 
+
 def delete_all_tasks():
     api = TodoistAPI(API_KEY)
     all_tasks = api.get_tasks()
@@ -8,7 +9,6 @@ def delete_all_tasks():
         for task in task_list:
             api.delete_task(task.id)
             print(f"Deleted task: {task.id}")
-
 
 
 def get_first_task_id():
