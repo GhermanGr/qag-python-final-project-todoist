@@ -1,4 +1,4 @@
-from config import BASE_URL, ENDPOINT_LOGIN
+from config import ENDPOINT_LOGIN
 from selene import browser
 from time import sleep
 
@@ -8,9 +8,9 @@ class LoginPage:
         pass
 
     def open(self):
-        browser.open(BASE_URL + ENDPOINT_LOGIN)
+        browser.open(ENDPOINT_LOGIN)
 
-    def login_email(self, email, password):
+    def as_user(self, email: str, password: str):
         browser.element('[type="email"]').type(email)
         browser.element('[type="password"]').type(password)
         browser.element('[type="submit"]').click()

@@ -5,9 +5,9 @@ from qag_python_final_project_todoist.web_model.pages.today_page import TodayPag
 
 class Application:
     def __init__(self):
-        self.landing_page = LandingPage()
-        self.login_page = LoginPage()
-        self.today_page = TodayPage()
+        self.landing = LandingPage()
+        self.login = LoginPage()
+        self.today = TodayPage()
 
 
 app = Application()

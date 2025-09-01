@@ -9,4 +9,4 @@
 2. Добавить ruff 
 3. Добавить --clean-alluredir --alluredir=allure-results в addopts 
 4. Добавить allure-results в .gitignore 
-5. 
+5. Добавить общий клиент для логгирования в терминал, allure 
