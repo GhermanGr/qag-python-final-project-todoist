@@ -1,6 +1,6 @@
 from time import sleep
 
-from selene import browser, by
+from selene import browser, by, be
 from selenium.webdriver import Keys
 
 from doist_api_methods import get_first_task_id
@@ -15,7 +15,7 @@ class TodayPage:
         browser.element('[aria-label="Task name"]').type(task_name)
         browser.element('[data-testid="task-editor-submit-button"]').click()
         sleep(
-            1
+            3
         )  # Небольшой период ожидания позволяет убедиться, что задача успела создаться,
         # иначе есть вероятность место task_id получить None
         task_id = get_first_task_id()
@@ -32,7 +32,7 @@ class TodayPage:
         browser.element(f'[id="task-{task_id}-content"]').click()
         browser.element('[data-testid="open-comment-editor-button"]').click()
         browser.element('[class="is-empty is-editor-empty"]').type(f"{comment}")
-        browser.element('[data-track="comments|add_comment"]').click()
+        browser.element('[data-track="comments|add_comment"]').should(be.visible).click()
 
     def delete_task(self, task_id):
         browser.element(f'[id="task-{task_id}-content"]').hover()

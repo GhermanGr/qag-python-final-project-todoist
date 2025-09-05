@@ -1,7 +1,7 @@
 from qag_python_final_project_todoist.web_model.pages.application import app
 
 from config import EMAIL, PASSWORD
-from selene import browser, have
+from selene import browser, have, be
 
 
 def test_login_by_email(delete_tasks):

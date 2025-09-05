@@ -38,7 +38,7 @@ def browser_management():
     options.add_argument("--headless")
 
     browser.config.driver_options = options
-    browser.config.window_width = 1920
+    browser.config.window_width = 1080
     browser.config.window_height = 1080
     browser.config._wait_decorator = support._logging.wait_with(
         context=allure_commons._allure.StepContext
