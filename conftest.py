@@ -42,12 +42,12 @@ def tasks_client(client) -> Client:
 @pytest.fixture(autouse=True)
 def browser_management():
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Keep for CI efficiency; remove if debugging UI needed
-    options.add_argument("--no-sandbox")  # Essential for Jenkins/Linux CI/root user
-    options.add_argument("--disable-dev-shm-usage")  # Avoids shared memory crashes in CI
+    options.add_argument("--headless")  # Keep for CI efficiency
+    options.add_argument("--no-sandbox")  # Essential for Jenkins/Linux/root
+    options.add_argument("--disable-dev-shm-usage")  # Avoid shared memory issues
 
-    # Use webdriver-manager to download/install driver
-    service = Service(ChromeDriverManager(cache_valid_range=1).install())  # Cache for 1 day to avoid redownloads
+    # Use webdriver-manager without cache_valid_range
+    service = Service(ChromeDriverManager().install())
     browser.config.driver = webdriver.Chrome(service=service, options=options)
 
     browser.config.window_width = 1080
