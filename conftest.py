@@ -11,6 +11,13 @@ from qag_python_final_project_todoist.api_model.utils.client import Client
 from qag_python_final_project_todoist.api_model.utils.configuration import Configuration
 from qag_python_final_project_todoist.api_model.clients.tasks import TasksClient
 
+import pytest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selene import browser, support
+import allure_commons
+
 
 # API
 @pytest.fixture
@@ -35,9 +42,14 @@ def tasks_client(client) -> Client:
 @pytest.fixture(autouse=True)
 def browser_management():
     options = webdriver.ChromeOptions()
-    #options.add_argument("--headless")
+    options.add_argument("--headless")  # Keep for CI efficiency; remove if debugging UI needed
+    options.add_argument("--no-sandbox")  # Essential for Jenkins/Linux CI/root user
+    options.add_argument("--disable-dev-shm-usage")  # Avoids shared memory crashes in CI
 
-    browser.config.driver_options = options
+    # Use webdriver-manager to download/install driver
+    service = Service(ChromeDriverManager(cache_valid_range=1).install())  # Cache for 1 day to avoid redownloads
+    browser.config.driver = webdriver.Chrome(service=service, options=options)
+
     browser.config.window_width = 1080
     browser.config.window_height = 1080
     browser.config._wait_decorator = support._logging.wait_with(

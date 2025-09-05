@@ -17,7 +17,8 @@ dependencies = [
     "ruff (>=0.12.11,<0.13.0)",
     "curlify2 (>=2.0.0,<3.0.0)",
     "structlog (>=25.4.0,<26.0.0)",
-    "httpx (>=0.28.1,<0.29.0)"
+    "httpx (>=0.28.1,<0.29.0)",
+    "webdriver-manager (>=4.0.2,<5.0.0)"
 ]
 
 [tool.pytest.ini_options]
