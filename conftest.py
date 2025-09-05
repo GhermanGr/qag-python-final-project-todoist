@@ -35,7 +35,7 @@ def tasks_client(client) -> Client:
 @pytest.fixture(autouse=True)
 def browser_management():
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
+    #options.add_argument("--headless")
 
     browser.config.driver_options = options
     browser.config.window_width = 1080
