@@ -46,8 +46,8 @@ def browser_management():
     options.add_argument("--no-sandbox")  # Essential for Jenkins/Linux/root
     options.add_argument("--disable-dev-shm-usage")  # Avoid shared memory issues
 
-    # Use webdriver-manager without cache_valid_range
-    service = Service(ChromeDriverManager().install())
+    # Use system-installed ChromeDriver
+    service = Service(executable_path="/usr/bin/chromedriver")  # Path to system ChromeDriver
     browser.config.driver = webdriver.Chrome(service=service, options=options)
 
     browser.config.window_width = 1080
