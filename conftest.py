@@ -18,6 +18,18 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selene import browser, support
 import allure_commons
 
+import logging
+import platform
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selene import browser, support
+from webdriver_manager.chrome import ChromeDriverManager
+import allure_commons
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 
 # API
 @pytest.fixture
@@ -41,22 +53,38 @@ def tasks_client(client) -> Client:
 # UI
 @pytest.fixture(autouse=True)
 def browser_management():
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Keep for CI efficiency
-    options.add_argument("--no-sandbox")  # Essential for Jenkins/Linux/root
-    options.add_argument("--disable-dev-shm-usage")  # Avoid shared memory issues
+    logger.debug("Starting browser_management fixture")
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
 
-    # Use system-installed ChromeDriver
-    service = Service(executable_path="/usr/bin/chromedriver")  # Path to system ChromeDriver
-    browser.config.driver = webdriver.Chrome(service=service, options=options)
+    # Use webdriver-manager for macOS, system path for Jenkins
+    if platform.system() == "Linux":
+        chromedriver_path = "/usr/bin/chromedriver"
+    else:
+        chromedriver_path = ChromeDriverManager().install()
 
+    service = Service(
+        executable_path=chromedriver_path,
+        log_path="chromedriver.log"
+    )
+    logger.debug("Initializing WebDriver")
+    browser.config.driver = webdriver.Chrome(
+        service=service, options=options, timeout=300
+    )
+    logger.debug("WebDriver initialized")
     browser.config.window_width = 1080
     browser.config.window_height = 1080
     browser.config._wait_decorator = support._logging.wait_with(
         context=allure_commons._allure.StepContext
     )
     browser.config.base_url = "https://www.todoist.com"
+    logger.debug("Opening base URL")
     browser.open("/")
+    yield
+    logger.debug("Quitting browser")
+    browser.quit()
 
     yield
 

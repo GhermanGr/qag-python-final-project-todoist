@@ -32,7 +32,7 @@ class TodayPage:
         browser.element(f'[id="task-{task_id}-content"]').click()
         browser.element('[data-testid="open-comment-editor-button"]').click()
         browser.element('[class="is-empty is-editor-empty"]').type(f"{comment}")
-        browser.element('[data-track="comments|add_comment"]').should(be.visible).click()
+        browser.element(by.text("Comment")).should(be.visible).click()
 
     def delete_task(self, task_id):
         browser.element(f'[id="task-{task_id}-content"]').hover()
