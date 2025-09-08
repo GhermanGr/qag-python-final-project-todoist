@@ -11,6 +11,9 @@ from qag_python_final_project_todoist.api_model.utils.client import Client
 from qag_python_final_project_todoist.api_model.utils.configuration import Configuration
 from qag_python_final_project_todoist.api_model.clients.tasks import TasksClient
 
+from selenium import webdriver
+from tempfile import mkdtemp
+
 
 # API
 @pytest.fixture
@@ -36,6 +39,8 @@ def tasks_client(client) -> Client:
 def browser_management():
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
+    # Set a unique user data directory for each session
+    options.add_argument(f"--user-data-dir={mkdtemp()}")
 
     browser.config.driver_options = options
     browser.config.window_width = 1920
@@ -45,10 +50,8 @@ def browser_management():
     )
     browser.config.base_url = "https://www.todoist.com"
     browser.open("/")
-
     yield
-
-    browser.quit()
+    browser.quit()  # Ensure the browser is closed after each test
 
 
 @pytest.fixture
