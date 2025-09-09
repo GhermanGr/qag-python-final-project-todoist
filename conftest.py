@@ -35,16 +35,7 @@ def tasks_client(client) -> Client:
 @pytest.fixture(autouse=True)
 def browser_management():
     # options = webdriver.ChromeOptions()
-    # options.add_argument("--headless")
-    #
-    # browser.config.driver_options = options
-    # browser.config.window_width = 1920
-    # browser.config.window_height = 1080
-    # browser.config._wait_decorator = support._logging.wait_with(
-    #     context=allure_commons._allure.StepContext
-    # )
-    # browser.config.base_url = "https://www.todoist.com"
-    # browser.open("/")
+
 
     options = Options()
     selenoid_capabilities = {
@@ -58,10 +49,21 @@ def browser_management():
 
     options.capabilities.update(selenoid_capabilities)
     driver = webdriver.Remote(
-        command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
+        command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub",
         options=options)
 
     browser.config.driver = driver
+
+    options.add_argument("--headless")
+
+    browser.config.driver_options = options
+    browser.config.window_width = 1920
+    browser.config.window_height = 1080
+    browser.config._wait_decorator = support._logging.wait_with(
+        context=allure_commons._allure.StepContext
+    )
+    browser.config.base_url = "https://www.todoist.com"
+    browser.open("/")
 
     yield
 
