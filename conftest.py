@@ -5,7 +5,7 @@ import allure_commons
 from selenium import webdriver
 import allure
 from qag_python_final_project_todoist.web_model.pages.application import app
-
+from selenium.webdriver.chrome.options import Options
 from doist_api_methods import delete_all_tasks
 from qag_python_final_project_todoist.api_model.utils.client import Client
 from qag_python_final_project_todoist.api_model.utils.configuration import Configuration
@@ -34,17 +34,34 @@ def tasks_client(client) -> Client:
 # UI
 @pytest.fixture(autouse=True)
 def browser_management():
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
+    # options = webdriver.ChromeOptions()
+    # options.add_argument("--headless")
+    #
+    # browser.config.driver_options = options
+    # browser.config.window_width = 1920
+    # browser.config.window_height = 1080
+    # browser.config._wait_decorator = support._logging.wait_with(
+    #     context=allure_commons._allure.StepContext
+    # )
+    # browser.config.base_url = "https://www.todoist.com"
+    # browser.open("/")
 
-    browser.config.driver_options = options
-    browser.config.window_width = 1920
-    browser.config.window_height = 1080
-    browser.config._wait_decorator = support._logging.wait_with(
-        context=allure_commons._allure.StepContext
-    )
-    browser.config.base_url = "https://www.todoist.com"
-    browser.open("/")
+    options = Options()
+    selenoid_capabilities = {
+        "browserName": "chrome",
+        "browserVersion": "128.0",
+        "selenoid:options": {
+            "enableVNC": True,
+            "enableVideo": False
+        }
+    }
+
+    options.capabilities.update(selenoid_capabilities)
+    driver = webdriver.Remote(
+        command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
+        options=options)
+
+    browser.config.driver = driver
 
     yield
 
