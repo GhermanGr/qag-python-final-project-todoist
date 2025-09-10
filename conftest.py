@@ -34,27 +34,27 @@ def tasks_client(client) -> Client:
 # UI
 @pytest.fixture(autouse=True)
 def browser_management():
-    # options = webdriver.ChromeOptions()
+    options = webdriver.ChromeOptions()
 
 
-    options = Options()
-    selenoid_capabilities = {
-        "browserName": "chrome",
-        "browserVersion": "128.0",
-        "selenoid:options": {
-            "enableVNC": True,
-            "enableVideo": False
-        }
-    }
+    # options = Options()
+    # selenoid_capabilities = {
+    #     "browserName": "chrome",
+    #     "browserVersion": "128.0",
+    #     "selenoid:options": {
+    #         "enableVNC": True,
+    #         "enableVideo": False
+    #     }
+    # }
+    #
+    # options.capabilities.update(selenoid_capabilities)
+    # driver = webdriver.Remote(
+    #     command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub",
+    #     options=options)
+    #
+    # browser.config.driver = driver
 
-    options.capabilities.update(selenoid_capabilities)
-    driver = webdriver.Remote(
-        command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub",
-        options=options)
-
-    browser.config.driver = driver
-
-    options.add_argument("--headless")
+    #options.add_argument("--headless")
 
     browser.config.driver_options = options
     browser.config.window_width = 1920

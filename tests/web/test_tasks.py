@@ -12,7 +12,7 @@ def test_creating_task(
 def test_completing_task(
     delete_tasks, login
 ):
-    task_id = app.today.create_task("This is a new task!")
+    task_id = app.today.create_task("This is a new task!2")
     app.today.complete_task(task_id)
     app.today.go_to_completed_page()
     assert browser.element(f'[href*="{task_id}"]').should(be.visible)
