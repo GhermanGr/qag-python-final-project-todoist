@@ -46,7 +46,7 @@ class TodayPage:
 
     def go_to_completed_page(self):
         browser.element('[aria-label="Completed"]').click()
-        sleep(5)
+        sleep(10)
 
     def go_to_inbox_page(self):
         browser.element('[aria-label^="Inbox"]').click()
