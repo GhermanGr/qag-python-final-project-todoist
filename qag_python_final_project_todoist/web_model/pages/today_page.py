@@ -24,7 +24,7 @@ class TodayPage:
     def complete_task(self, task_id):
         browser.element(f'[aria-describedby="task-{task_id}-content"]').click()
         sleep(
-            60
+            55
         )  # Почему-то список выполненных заданий обновляется не сразу, нужно подождать
         # до наступления следующей минуты
 

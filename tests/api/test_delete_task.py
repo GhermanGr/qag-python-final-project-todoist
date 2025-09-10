@@ -4,4 +4,4 @@ from http import HTTPStatus
 
 def test_delete_task(tasks_client: TasksClient):
     got = tasks_client.delete_task()
-    assert got.status_code == HTTPStatus.NO_CONTENT
+    assert got.status_code == 204
