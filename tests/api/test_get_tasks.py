@@ -17,4 +17,4 @@ from http import HTTPStatus
 
 def test_get_tasks(tasks_client: TasksClient):
     got = tasks_client.get_tasks()
-    assert got.status_code == 204
+    assert got.status_code == 200
