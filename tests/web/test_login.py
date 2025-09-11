@@ -7,7 +7,7 @@ from time import sleep
 @allure.step('Test logging in Todoist using user email and password')
 def test_login_by_email(delete_tasks):
     sleep(20)
-    with allure.step('Go from the landing page to the login page'):
-        app.landing.go_to_login_page()
+    app.landing.go_to_login_page()
     app.login.as_user(EMAIL, PASSWORD)
-    assert browser.element('[data-testid="large-header"]').should(have.text("Today"))
+    with allure.step('Confirm that the Today page is open'):
+        assert browser.element('[data-testid="large-header"]').should(have.text("Today"))

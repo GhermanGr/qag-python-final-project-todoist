@@ -69,13 +69,13 @@ def browser_management():
 
     browser.quit()
 
-
+@allure.step('Delete all currently active tasks')
 @pytest.fixture
 def delete_tasks():
     delete_all_tasks()
     yield
 
-
+@allure.step('Log into Todoist using user email and password')
 @pytest.fixture
 def login(delete_tasks):
     app.login.open()
